@@ -12,6 +12,19 @@ function get_likes($post_id) {
     return $likes;
 }
 
+function check_like($post_id, $user_id) {
+    global $db;
+    $query = 'SELECT * FROM likes
+          WHERE user_id = :user_id AND post_id = :post_id';
+    $statement = $db->prepare($query);
+    $statement->bindValue(":post_id", $post_id);
+    $statement->bindValue(":user_id", $user_id);
+    $statement->execute();
+    $like = $statement->fetch();
+    $statement->closeCursor();
+    return $like;
+}
+
 function like_post($post_id, $user_id) {
     global $db;
     $query = 'INSERT INTO likes

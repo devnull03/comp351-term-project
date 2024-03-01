@@ -45,10 +45,24 @@ switch ($action) {
 		header('Location: .');
 		break;
 
-	case 'like':
-		// TODO: add like
+	case 'create_like':
+
+		$post_id = filter_input(INPUT_GET, 'post_id');
+		$user_id = $_SESSION['user']['id'];
+
+		like_post($post_id, $user_id);
+		header('Location: .');
+
+		break;
 	case 'unlike':
-		// TODO: remove like
+
+		$post_id = filter_input(INPUT_GET, 'post_id');
+		$user_id = $_SESSION['user']['id'];
+
+		unlike_post($post_id, $user_id);
+		header('Location: .');
+
+		break;
 	case 'comment':
 		// TODO: add comment
 	case 'view_post':

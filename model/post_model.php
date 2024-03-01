@@ -4,11 +4,16 @@
 function get_posts()
 {
     global $db;
-    $query = 'SELECT * FROM posts JOIN users ON posts.user_id = users.id
-	      ORDER BY posts.id DESC';
+    $query = 'SELECT posts.*, count(distinct likes.id) as likes, count(distinct comments.id) as comment_count, users.username FROM posts 
+            left join likes ON posts.id = likes.post_id 
+            join users on posts.user_id = users.id 
+            left join comments on posts.id = comments.post_id 
+            GROUP BY posts.id ORDER BY posts.id DESC';
+
     $statement = $db->prepare($query);
     $statement->execute();
     $posts = $statement->fetchAll();
+
     $statement->closeCursor();
     return $posts;
 }

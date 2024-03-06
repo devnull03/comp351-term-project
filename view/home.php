@@ -24,6 +24,8 @@ $posts = get_posts();
 			<?php endif; ?>
 		</form>
 
+		<?php echo $post ?? "no post" ?>
+
 		<div class="flex flex-col gap-4 pb-20">
 			<?php foreach ($posts as $post) : ?>
 

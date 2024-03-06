@@ -21,8 +21,13 @@ function get_posts()
 function get_post($post_id)
 {
     global $db;
-    $query = 'SELECT * FROM posts
-	      WHERE id = :post_id';
+    $query = 'SELECT posts.*, count(distinct likes.id) as likes, count(distinct comments.id) as comment_count, users.username FROM posts 
+            left join likes ON posts.id = likes.post_id 
+            join users on posts.user_id = users.id 
+            left join comments on posts.id = comments.post_id 
+            WHERE posts.id = :post_id
+            GROUP BY posts.id ORDER BY posts.id DESC';
+
     $statement = $db->prepare($query);
     $statement->bindValue(":post_id", $post_id);
     $statement->execute();

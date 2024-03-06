@@ -22,6 +22,7 @@ require('model/like_model.php');
 require('model/user_model.php');
 
 $action = filter_input(INPUT_POST, 'action') ?? filter_input(INPUT_GET, 'action');
+$post_id = filter_input(INPUT_POST, 'post') ?? filter_input(INPUT_GET, 'post');
 
 switch ($action) {
 	case 'new_post':
@@ -51,27 +52,41 @@ switch ($action) {
 		$user_id = $_SESSION['user']['id'];
 
 		like_post($post_id, $user_id);
-		header('Location: .');
+
+		if (filter_input(INPUT_GET, 'page') == 'post') {
+			header('Location: ?post=' . $post_id);
+		} else {
+			header('Location: .');
+		}
 
 		break;
+
 	case 'unlike':
 
 		$post_id = filter_input(INPUT_GET, 'post_id');
 		$user_id = $_SESSION['user']['id'];
 
 		unlike_post($post_id, $user_id);
-		header('Location: .');
+
+		if (filter_input(INPUT_GET, 'page') == 'post') {
+			header('Location: ?post=' . $post_id);
+		} else {
+			header('Location: .');
+		}
 
 		break;
+
 	case 'comment':
 		// TODO: add comment
-	case 'view_post':
-		// TODO: view post
-	case 'view_user':
-		// TODO: view user
 
 	default:
-		include('view/home.php');
+
+		if ($post_id) {
+			include('view/post.php');
+		} else {
+			include('view/home.php');
+		}
+
 		break;
 }
 

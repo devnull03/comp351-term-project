@@ -1,7 +1,7 @@
 <?php
 ?>
 
-<header class="fixed top-0 h-16 w-screen shadow p-4 px-10 flex items-center justify-between bg-white">
+<header class="fixed top-0 h-16 w-screen shadow p-4 px-10 z-50 flex items-center justify-between bg-white">
 
 	<div>
 		<a href="index.php" class="text-3xl font-bold">PHP Blog Platform</a>

@@ -25,7 +25,7 @@ if ($tab === 'likes') {
 				<img src=<?php echo "https://picsum.photos/seed/" . $user["username"] . "/200" ?> alt="user" class="rounded-full w-24 h-24">
 				<div class="flex flex-col">
 					<h1 class="text-4xl font-bold"><?php echo $user['username']; ?></h1>
-					<p class="text-lg"><?php echo sizeof($user_posts); ?> posts</p>
+					<p class="text-lg"><?php echo sizeof($user_posts); ?> <?php echo (sizeof($user_posts) === 1) ? "post" : "posts"; ?></p>
 				</div>
 			</div>
 		</div>
@@ -37,6 +37,10 @@ if ($tab === 'likes') {
 		</div>
 
 		<div class="flex flex-col gap-4 pb-20">
+
+			<?php if (sizeof($curr_list) === 0) : ?>
+				<p class="w-full flex justify-center">No <?php echo $tab ?> to show</p>
+			<?php endif; ?>
 
 			<?php foreach ($curr_list as $post) : ?>
 
@@ -75,8 +79,16 @@ if ($tab === 'likes') {
 									<button type="submit" class="fa fa-comment-o hover:text-blue-400 transition-all ease-in-out duration-300"></button>
 									<span><?php echo $post['comments'] ?></span>
 								</form>
-
 							</div>
+
+							<?php if ($tab !== 'posts') : ?>
+								<div class="text-xs text-gray-500 hover:underline cursor-pointer">
+									<a href="?user=<?php echo $post['username'] ?>">
+										<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
+									</a>
+
+								</div>
+							<?php endif; ?>
 
 						</div>
 					</div>

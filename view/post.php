@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 $post = get_post($post_id);
 $comments = get_comments($post_id);

@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             register($username, $password);
             $user = login($username, $password);
 
-            session_start();
+            // session_start();
             $_SESSION['user'] = $user;
 
             header('Location: .');

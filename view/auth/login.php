@@ -28,7 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = login($username, $password);
 
         if (is_array($user)) {
-            session_start();
+
+            // session_set_cookie_params($lifetime, '/');
+
+            // session_start();
             $_SESSION['user'] = $user;
             header('Location: .');
         } else {

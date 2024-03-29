@@ -1,5 +1,4 @@
 <?php
-session_start();
 ?>
 
 <header class="fixed top-0 h-16 w-screen shadow p-4 px-10 flex items-center justify-between bg-white">

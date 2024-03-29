@@ -24,8 +24,6 @@ $posts = get_posts();
 			<?php endif; ?>
 		</form>
 
-		<?php echo $post ?? "no post" ?>
-
 		<div class="flex flex-col gap-4 pb-20">
 			<?php foreach ($posts as $post) : ?>
 
@@ -43,7 +41,11 @@ $posts = get_posts();
 									<input type="hidden" name="post_id" value="<?php echo $post['id'] ?>">
 
 									<?php
-									$liked = check_like($post['id'], $_SESSION['user']['id']);
+									if (!isset($_SESSION['user'])) {
+										$liked = false;
+									} else {
+										$liked = check_like($post['id'], $_SESSION['user']['id']);
+									}
 									?>
 									<?php if ($liked) : ?>
 										<input type="hidden" name="action" value="unlike">

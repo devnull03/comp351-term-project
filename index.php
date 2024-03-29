@@ -9,11 +9,15 @@
 </head>
 
 
-<?php include('view/page/header.php'); ?>
-
-
 <?php
+
+$lifetime = 60 * 60 * 24 * 14; // 2 weeks in seconds
+session_set_cookie_params($lifetime, '/');
 session_start();
+
+if (!isset($_SESSION['user'])) {
+	$_SESSION['user'] = null;
+}
 
 require('model/database.php');
 require('model/post_model.php');
@@ -23,6 +27,9 @@ require('model/user_model.php');
 
 $action = filter_input(INPUT_POST, 'action') ?? filter_input(INPUT_GET, 'action');
 $post_id = filter_input(INPUT_POST, 'post') ?? filter_input(INPUT_GET, 'post');
+$user_id = filter_input(INPUT_POST, 'user') ?? filter_input(INPUT_GET, 'user');
+
+include('view/page/header.php');
 
 switch ($action) {
 	case 'new_post':
@@ -42,7 +49,15 @@ switch ($action) {
 		include('view/auth/signup.php');
 		break;
 	case 'logout':
+		$_SESSION = array();
 		session_destroy();
+
+		$name = session_name();
+		$expire = strtotime('-1 year');
+		$params = session_get_cookie_params();
+		$path = $params['path'];
+		setcookie($name, '', $expire, $path);
+
 		header('Location: .');
 		break;
 
@@ -83,6 +98,8 @@ switch ($action) {
 
 		if ($post_id) {
 			include('view/post.php');
+		} elseif ($user_id) {
+			include('view/user.php');
 		} else {
 			include('view/home.php');
 		}

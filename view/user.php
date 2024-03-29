@@ -30,10 +30,10 @@ if ($tab === 'likes') {
 			</div>
 		</div>
 
-		<div class="flex w-full gap-4 border-b border-black pb-2">
-			<span class=<?php echo ($tab === "posts") ? "font-bold" : ""; ?>>Posts</span>
-			<span class=<?php echo ($tab === "likeks") ? "font-bold" : ""; ?>>Likes</span>
-			<span class=<?php echo ($tab === "comments") ? "font-bold" : ""; ?>>Comments</span>
+		<div class="flex w-full gap-4 border-b border-black pb-2 *:cursor-pointer">
+			<a href=<?php echo "/?user=" . $user["username"] . "&tab=posts" ?> class=<?php echo ($tab === "posts") ? "font-bold" : ""; ?>>Posts</a>
+			<a href=<?php echo "/?user=" . $user["username"] . "&tab=likes" ?> class=<?php echo ($tab === "likes") ? "font-bold" : ""; ?>>Likes</a>
+			<a href=<?php echo "/?user=" . $user["username"] . "&tab=comments" ?> class=<?php echo ($tab === "comments") ? "font-bold" : ""; ?>>Comments</a>
 		</div>
 
 		<div class="flex flex-col gap-4 pb-20">

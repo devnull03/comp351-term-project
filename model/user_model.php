@@ -1,6 +1,7 @@
 <?php
 
-function get_user($user_id) {
+function get_user($user_id)
+{
     global $db;
     $query = 'SELECT * FROM users
 	      WHERE id = :user_id';
@@ -13,7 +14,8 @@ function get_user($user_id) {
     return $user;
 }
 
-function get_user_by_username($username) {
+function get_user_by_username($username)
+{
     global $db;
     $query = 'SELECT * FROM users
 	      WHERE username = :username';
@@ -26,7 +28,8 @@ function get_user_by_username($username) {
     return $user;
 }
 
-function get_user_posts($user_id) {
+function get_user_posts($user_id)
+{
     global $db;
     $query = 'SELECT * FROM posts
           WHERE user_id = :user_id ORDER BY created_at DESC';
@@ -38,19 +41,28 @@ function get_user_posts($user_id) {
     return $posts;
 }
 
-function get_user_likes($user_id) {
+function get_user_likes($user_id)
+{
     global $db;
     $query = 'SELECT * FROM likes
-          WHERE user_id = :user_id';
+          WHERE user_id = :user_id ORDER BY created_at DESC';
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();
     $likes = $statement->fetchAll();
     $statement->closeCursor();
-    return $likes;
+
+    $posts = [];
+    foreach ($likes as $like) {
+        $post = get_post($like['post_id']);
+        $posts[] = $post;
+    }
+
+    return $posts;
 }
 
-function get_user_comments($user_id) {
+function get_user_comments($user_id)
+{
     global $db;
     $query = 'SELECT * FROM comments
           WHERE user_id = :user_id';
@@ -61,5 +73,3 @@ function get_user_comments($user_id) {
     $statement->closeCursor();
     return $comments;
 }
-
-

@@ -31,8 +31,15 @@ function get_user_by_username($username)
 function get_user_posts($user_id)
 {
     global $db;
-    $query = 'SELECT * FROM posts
-          WHERE user_id = :user_id ORDER BY created_at DESC';
+
+    $query = 'SELECT posts.*, count(distinct likes.id) as likes, count(distinct comments.id) as comment_count, users.username FROM posts 
+            left join likes ON posts.id = likes.post_id 
+            join users on posts.user_id = users.id 
+            left join comments on posts.id = comments.post_id  
+            WHERE posts.user_id = :user_id
+            GROUP BY posts.id ORDER BY posts.id DESC';
+
+
     $statement = $db->prepare($query);
     $statement->bindValue(":user_id", $user_id);
     $statement->execute();

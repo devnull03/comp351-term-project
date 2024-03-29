@@ -92,7 +92,7 @@ switch ($action) {
 		break;
 
 	case 'comment':
-		// TODO: add comment
+		// TODO: add comments
 
 	default:
 

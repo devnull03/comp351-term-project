@@ -42,7 +42,9 @@ $comments = get_comments($post_id);
 					</form>
 				</div>
 				<div class="text-xs text-gray-500">
-					<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
+					<a href="?user=<?php echo $post['username'] ?>">
+						<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
+					</a>
 				</div>
 			</div>
 		</div>

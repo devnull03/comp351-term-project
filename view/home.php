@@ -64,8 +64,10 @@ $posts = get_posts();
 									<span><?php echo $post['comment_count'] ?></span>
 								</form>
 							</div>
-							<div class="text-xs text-gray-500">
-								<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
+							<div class="text-xs text-gray-500 hover:underline cursor-pointer">
+								<a href="?user=<?php echo $post['username'] ?>">
+									<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
+								</a>
 							</div>
 						</div>
 					</div>

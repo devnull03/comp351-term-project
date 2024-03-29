@@ -27,7 +27,7 @@ require('model/user_model.php');
 
 $action = filter_input(INPUT_POST, 'action') ?? filter_input(INPUT_GET, 'action');
 $post_id = filter_input(INPUT_POST, 'post') ?? filter_input(INPUT_GET, 'post');
-$user_id = filter_input(INPUT_POST, 'user') ?? filter_input(INPUT_GET, 'user');
+$username = filter_input(INPUT_POST, 'user') ?? filter_input(INPUT_GET, 'user');
 
 include('view/page/header.php');
 
@@ -98,7 +98,7 @@ switch ($action) {
 
 		if ($post_id) {
 			include('view/post.php');
-		} elseif ($user_id) {
+		} elseif ($username) {
 			include('view/user.php');
 		} else {
 			include('view/home.php');

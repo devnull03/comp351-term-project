@@ -33,7 +33,7 @@ if ($tab === 'likes') {
 		<div class="flex w-full gap-4 border-b border-black pb-2 *:cursor-pointer">
 			<a href=<?php echo "/?user=" . $user["username"] . "&tab=posts" ?> class=<?php echo ($tab === "posts") ? "font-bold" : ""; ?>>Posts</a>
 			<a href=<?php echo "/?user=" . $user["username"] . "&tab=likes" ?> class=<?php echo ($tab === "likes") ? "font-bold" : ""; ?>>Likes</a>
-			<a href=<?php echo "/?user=" . $user["username"] . "&tab=comments" ?> class=<?php echo ($tab === "comments") ? "font-bold" : ""; ?>>Comments</a>
+			<!-- <a href=<?php echo "/?user=" . $user["username"] . "&tab=comments" ?> class=<?php echo ($tab === "comments") ? "font-bold" : ""; ?>>Comments</a> -->
 		</div>
 
 		<div class="flex flex-col gap-4 pb-20">
@@ -74,11 +74,11 @@ if ($tab === 'likes') {
 
 									<span><?php echo $post['likes'] ?></span>
 								</form>
-								<form action="." class="m-0 flex gap-1 items-center">
+								<!-- <form action="." class="m-0 flex gap-1 items-center">
 									<input type="hidden" name="post_id" value="<?php echo $post['id'] ?>">
 									<button type="submit" class="fa fa-comment-o hover:text-blue-400 transition-all ease-in-out duration-300"></button>
 									<span><?php echo $post['comment_count'] ?></span>
-								</form>
+								</form> -->
 							</div>
 
 							<?php if ($tab !== 'posts') : ?>
@@ -87,6 +87,12 @@ if ($tab === 'likes') {
 										<?php echo $post['username'] . ' - ' . date_format(date_create($post['created_at']), 'd M Y'); ?>
 									</a>
 
+								</div>
+							<?php else : ?>
+								<div class="text-xs text-gray-500">
+									<a href="?user=<?php echo $post['username'] ?>">
+										<?php echo date_format(date_create($post['created_at']), 'd M Y'); ?>
+									</a>
 								</div>
 							<?php endif; ?>
 

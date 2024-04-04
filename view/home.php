@@ -57,12 +57,12 @@ $posts = get_posts();
 
 									<span><?php echo $post['likes'] ?></span>
 								</form>
-								<form action="." class="m-0 flex gap-1 items-center">
+								<!-- <form action="." class="m-0 flex gap-1 items-center">
 									<input type="hidden" name="action" value="create_comment">
 									<input type="hidden" name="post_id" value="<?php echo $post['id'] ?>">
 									<button type="submit" class="fa fa-comment-o hover:text-blue-400 transition-all ease-in-out duration-300"></button>
 									<span><?php echo $post['comment_count'] ?></span>
-								</form>
+								</form> -->
 							</div>
 							<div class="text-xs text-gray-500 hover:underline cursor-pointer">
 								<a href="?user=<?php echo $post['username'] ?>">
